@@ -184,8 +184,9 @@ def main():
         img_split = image_list[step].split('/')
         img_id = img_split[-1][:-4]
         
-        msk = decode_labels(parsing_, num_classes=N_CLASSES)
-        parsing_im = Image.fromarray(msk[0])
+        images_mine = decode_labels_mine(parsing_, num_classes=N_CLASSES)
+        parsing_im = images_mine[0] #Image.fromarray(msk[0])
+        
         parsing_im.save('{}/{}_vis.png'.format(parsing_dir, img_id))
         cv2.imwrite('{}/{}.png'.format(parsing_dir, img_id), parsing_[0,:,:,0])
         sio.savemat('{}/{}.mat'.format(parsing_dir, img_id), {'data': scores[0,:,:]})
